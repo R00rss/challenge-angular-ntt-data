@@ -1,0 +1,9 @@
+.product-search {
+}
+
+.product-search input {
+  width: 250px;
+  padding: 12px;
+  border-radius: 10px;
+  border: solid 2px var(--color-gray-medium);
+}

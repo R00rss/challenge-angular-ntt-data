@@ -1,0 +1,24 @@
+<section class="pagination-container">
+  <span class="item-count">
+    {{ totalItems }} {{ totalItems === 1 ? "Resultado" : "Resultados" }}
+  </span>
+  <div class="combo-box-container" (click)="closeDropdown()">
+    <div class="combo-box" (click)="stopPropagation($event)">
+      <div class="combo-box-selected" (click)="toggleDropdown()">
+        <span class="selected-value">{{ pageSize }}</span>
+        <span class="arrow" [class.arrow-up]="isDropdownOpen">▼</span>
+      </div>
+      <ul class="combo-box-options" [class.show]="isDropdownOpen">
+        @for (option of pageSizeOptions; track option) {
+        <li
+          class="combo-box-option"
+          [class.selected]="option === pageSize"
+          (click)="handlePageSizeChange(option)"
+        >
+          {{ option }}
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>

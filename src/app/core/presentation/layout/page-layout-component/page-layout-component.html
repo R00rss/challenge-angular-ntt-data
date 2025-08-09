@@ -1,0 +1,18 @@
+<div class="layout-container">
+  <header class="layout-header">
+    <img
+      src="/assets/banco-logo.png"
+      alt="banco logo"
+      class="logo"
+    />
+    <ng-content select="[slot=header]"></ng-content>
+  </header>
+  <div class="layout-body">
+    <main class="layout-main">
+      <ng-content></ng-content>
+    </main>
+  </div>
+  <footer class="layout-footer">
+    <ng-content select="[slot=footer]"></ng-content>
+  </footer>
+</div>

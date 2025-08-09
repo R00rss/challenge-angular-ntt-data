@@ -1,0 +1,14 @@
+<thead class="product-header-container">
+  <tr class="product-header-item">
+    @for (header of headers; track header) {
+    <th>
+      <span>{{ header.name }}</span>
+      @if(header.hasToolTip){
+      <button class="tooltip-button">
+        <info-icon-component />
+      </button>
+      }
+    </th>
+    }
+  </tr>
+</thead>

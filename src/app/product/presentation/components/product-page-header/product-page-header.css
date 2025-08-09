@@ -1,0 +1,18 @@
+.product-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 16px 24px; */
+  padding: 16px 0px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.product-page-header button {
+  color: var(--color-secondary);
+  background-color: var(--color-primary);
+  padding: 14px 20px;
+  font-weight: 700;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

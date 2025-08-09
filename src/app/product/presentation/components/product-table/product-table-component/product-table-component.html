@@ -1,0 +1,13 @@
+<section class="product-table-container">
+  <product-table-header-component />
+  <product-table-body-component
+    [products]="products"
+    [options]="options"
+    (onOptionClick)="handleOptionClick($event)"
+  />
+  <product-table-pagination
+    [pageSize]="pageSize"
+    [totalItems]="totalItems"
+    (onPageSizeChange)="handlePageSizeChange($event)"
+  />
+</section>

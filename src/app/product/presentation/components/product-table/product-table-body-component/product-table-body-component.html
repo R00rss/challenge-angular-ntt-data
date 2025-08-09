@@ -1,0 +1,43 @@
+<tbody class="product-list-container">
+  @for (product of products; track product.id) {
+  <tr class="product-list-item">
+    <td class="product-logo-container">
+      <img
+        class="product-logo"
+        [src]="product.logo"
+        alt="{{ product.name }} logo"
+      />
+    </td>
+    <td>
+      <span>{{ product.name }}</span>
+    </td>
+    <td>
+      <span>{{ product.name }}</span>
+    </td>
+    <td>
+      <span>{{ product.dateRelease | date : "dd/MM/yyyy" }}</span>
+    </td>
+    <td>
+      <span>{{ product.dateReview | date : "dd/MM/yyyy" }}</span>
+    </td>
+    <td
+      class="product-dots-container combo-box-container"
+      (click)="stopPropagation($event)"
+    >
+      <button class="product-dots-button" (click)="toggleDropdown()">
+        <three-dots-icon-component />
+      </button>
+      <ul class="combo-box-options" [class.show]="isDropdownOpen">
+        @for (option of options; track option.label) {
+        <li
+          class="combo-box-option"
+          (click)="handleOptionClick(option.operation, product)"
+        >
+          {{ option.label }}
+        </li>
+        }
+      </ul>
+    </td>
+  </tr>
+  }
+</tbody>
