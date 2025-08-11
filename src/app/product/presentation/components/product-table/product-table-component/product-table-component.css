@@ -1,5 +1,10 @@
+.product-table-wrapper {
+  overflow-x: auto;
+}
+
 .product-table-container {
   background-color: var(--color-light);
   padding: 22px;
   border-radius: 5px;
+  width: 1280px;
 }
