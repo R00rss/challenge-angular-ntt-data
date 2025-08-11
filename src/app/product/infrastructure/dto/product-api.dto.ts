@@ -7,6 +7,10 @@ export interface ProductApiDto {
   date_revision: string;
 }
 
+export interface GetProductApiResponse {
+  data: ProductApiDto;
+}
+
 export interface GetProductsApiResponse {
   data: ProductApiDto[];
 }
@@ -24,6 +28,9 @@ export interface UpdateProductsApiResponse {
 export interface DeleteProductsApiResponse {
   message: string;
 }
+
+export type ExistsApiResponse = boolean;
+export type GetProductById = ProductApiDto;
 
 export interface ApiErrorResponse {
   name: string;

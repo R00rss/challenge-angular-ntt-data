@@ -28,10 +28,11 @@
 
 .product-list-item .product-logo {
   width: 90%;
+  max-height: 50px;
   margin-inline: auto;
   max-width: 120px;
   height: auto;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .product-list-item .product-dots-container {

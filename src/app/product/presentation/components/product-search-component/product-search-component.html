@@ -1,3 +1,7 @@
 <div class="product-search">
-  <input type="text" placeholder="Search..." />
+  <input
+    (input)="onSearchTermChange($event)"
+    type="text"
+    placeholder="Search..."
+  />
 </div>

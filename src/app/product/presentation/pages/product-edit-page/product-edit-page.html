@@ -1,0 +1,17 @@
+<page-layout-component>
+  @if(loadingProduct){
+    <p>Cargando...</p>
+  } 
+
+  @if(errorMessage && !loadingProduct){
+    <p class="error-message">{{ errorMessage }}</p>
+  }
+
+  @if(!errorMessage && !loadingProduct && fondedProduct){
+    <product-form
+      (onSubmitForm)="onSubmitForm($event)"
+      [initProduct]="fondedProduct"
+    />
+  }
+
+</page-layout-component>

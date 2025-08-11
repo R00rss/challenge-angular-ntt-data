@@ -1,10 +1,22 @@
 <section class="product-table-container">
   <product-table-header-component />
-  <product-table-body-component
-    [products]="products"
-    [options]="options"
-    (onOptionClick)="handleOptionClick($event)"
-  />
+
+  @if(isLoadingProducts){
+    <product-table-skeleton-component />
+  } 
+  
+  @if(!isLoadingProducts && !thereAreNotProducts){
+    <product-table-body-component
+      [products]="products"
+      [options]="options"
+      (onOptionClick)="handleOptionClick($event)"
+    />
+  } 
+  
+  @if(!isLoadingProducts && thereAreNotProducts){
+    <div class="no-products-message">No se encontraron productos</div>
+  }
+
   <product-table-pagination
     [pageSize]="pageSize"
     [totalItems]="totalItems"

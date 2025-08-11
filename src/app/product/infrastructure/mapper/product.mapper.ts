@@ -7,8 +7,8 @@ export class ProductMapper {
 
     return {
       ...rest,
-      dateRelease: new Date(date_release),
-      dateReview: new Date(date_revision),
+      dateRelease: new Date(dto.date_release),
+      dateReview: new Date(dto.date_revision),
     };
   }
 
@@ -18,11 +18,13 @@ export class ProductMapper {
 
   static toDto(entity: ProductEntity): ProductApiDto {
     const { dateRelease, dateReview, ...rest } = entity;
+    const dateReleaseString = dateRelease.toISOString();
+    const dateReviewString = dateReview.toISOString();
 
     return {
       ...rest,
-      date_release: dateRelease.toISOString().split('T')[0],
-      date_revision: dateReview.toISOString().split('T')[0],
+      date_release: dateReleaseString,
+      date_revision: dateReviewString,
     };
   }
 }

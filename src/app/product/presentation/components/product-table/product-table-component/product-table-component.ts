@@ -7,6 +7,7 @@ import {
   OptionProductClick,
   ProductService,
 } from '@/app/product/application/services/product-service';
+import { ProductTableSkeletonComponent } from '../product-table-skeleton-component/product-table-skeleton-component';
 
 const DEFAULT_PAGE_SIZE = 5;
 const DEFAULT_TOTAL_ITEMS = 5;
@@ -17,18 +18,27 @@ const DEFAULT_TOTAL_ITEMS = 5;
     ProductTableBodyComponent,
     ProductTableHeaderComponent,
     ProductTablePagination,
+    ProductTableSkeletonComponent,
   ],
   templateUrl: './product-table-component.html',
   styleUrl: './product-table-component.css',
 })
 export class ProductTableComponent {
-  constructor(public productService: ProductService) {
+  constructor(private productService: ProductService) {
     this.productService.paginatedProducts$.subscribe((products) => {
       this.products = products?.items ?? [];
       this.totalItems = products?.totalItems ?? DEFAULT_TOTAL_ITEMS;
       this.pageSize = products?.pagination.pageSize ?? DEFAULT_PAGE_SIZE;
+      this.thereAreNotProducts = this.products.length === 0;
+    });
+
+    this.productService.isLoadingProducts$.subscribe((isLoading) => {
+      this.isLoadingProducts = isLoading;
     });
   }
+
+  isLoadingProducts = true;
+  thereAreNotProducts = false;
 
   products: ProductEntity[] = [];
   totalItems: number = DEFAULT_TOTAL_ITEMS;

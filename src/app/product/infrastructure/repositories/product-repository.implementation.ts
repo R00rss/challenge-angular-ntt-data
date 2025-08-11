@@ -2,6 +2,7 @@ import { ProductRepository } from '@/app/product/domain/repositories/product-rep
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, catchError, throwError, switchMap } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import ProductEntity from '../../domain/entities/product.entity';
 import { PaginatedResult } from '@/app/core/domain/entities/paginated-result';
 import { ProductQuery } from '../../domain/value-objects/product-query';
@@ -11,6 +12,8 @@ import { ApiError } from '../errors/api-errors';
 import {
   ApiErrorResponse,
   DeleteProductsApiResponse,
+  ExistsApiResponse,
+  GetProductById,
   GetProductsApiResponse,
   PostProductsApiResponse,
   UpdateProductsApiResponse,
@@ -23,22 +26,22 @@ class HttpProductRepository implements ProductRepository {
 
   constructor(private readonly httpClient: HttpClient) {}
 
+  findById(id: string): Observable<ProductEntity | null> {
+    return this.httpClient.get<GetProductById>(`${this.baseUrl}/${id}`).pipe(
+      map((response) => {
+        if (response) {
+          return ProductMapper.fromDto(response);
+        }
+        return null;
+      }),
+      catchError((error) => this.handleError(error))
+    );
+  }
+
   findAll(): Observable<ProductEntity[]> {
     return this.httpClient.get<GetProductsApiResponse>(this.baseUrl).pipe(
-      // map((response) => ProductMapper.fromDtoList(response.data)),
-      //TODO: change this hardcode example
-      map((response) =>
-        ProductMapper.fromDtoList([
-          {
-            id: 'trj-crd',
-            name: 'Tarjetas de Crédito',
-            description: 'Tarjeta de consumo bajo la modalidad de crédito',
-            logo: 'https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg',
-            date_release: '2023-02-01',
-            date_revision: '2024-02-01',
-          },
-        ])
-      ),
+      map((response) => ProductMapper.fromDtoList(response.data)),
+      delay(1000),
       catchError((error) => this.handleError(error))
     );
   }
@@ -71,9 +74,9 @@ class HttpProductRepository implements ProductRepository {
     );
   }
 
-  exists(id: string): Observable<boolean> {
+  exists(id: string): Observable<ExistsApiResponse> {
     const url = `${this.baseUrl}/verification/${id}`;
-    return this.httpClient.get<boolean>(url);
+    return this.httpClient.get<ExistsApiResponse>(url);
   }
 
   delete(id: string): Observable<void> {
@@ -117,23 +120,21 @@ class HttpProductRepository implements ProductRepository {
     entity: Omit<ProductEntity, 'id'>
   ): Observable<ProductEntity> {
     const url = `${this.baseUrl}/${id}`;
-    return this.httpClient.put<UpdateProductsApiResponse>(url, entity).pipe(
+    const auxEntity: ProductEntity = { ...entity, id };
+    const dto = ProductMapper.toDto(auxEntity);
+    return this.httpClient.put<UpdateProductsApiResponse>(url, dto).pipe(
       map((response) => ProductMapper.fromDto(response.data)),
       catchError((error) => this.handleError(error))
     );
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    console.error('API Error:', error); // Para desarrollo
-
     let apiError: ApiError;
 
     if (error.error && typeof error.error === 'object') {
-      // Error estructurado de la API
       const errorResponse = error.error as ApiErrorResponse;
       apiError = ApiError.fromResponse(errorResponse, error.status);
 
-      // Log estructurado para producción
       console.error('Structured API Error:', {
         statusCode: error.status,
         errorName: errorResponse.name,
@@ -142,7 +143,6 @@ class HttpProductRepository implements ProductRepository {
         timestamp: new Date().toISOString(),
       });
     } else {
-      // Error no estructurado (network, etc.)
       apiError = new ApiError(
         error.message || 'Unknown error occurred',
         error.status || 0

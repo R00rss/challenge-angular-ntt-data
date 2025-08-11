@@ -1,13 +1,12 @@
 import ProductEntity from '@/app/product/domain/entities/product.entity';
-import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ThreeDotsIconComponent } from '@/app/core/presentation/icon/three-dots-icon-component/three-dots-icon-component';
-import { Router } from '@angular/router';
 import { OptionProductClick } from '@/app/product/application/services/product-service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'product-table-body-component',
-  imports: [DatePipe, ThreeDotsIconComponent],
+  imports: [ThreeDotsIconComponent, DatePipe],
   templateUrl: './product-table-body-component.html',
   styleUrl: './product-table-body-component.css',
 })
@@ -16,14 +15,14 @@ export class ProductTableBodyComponent {
   @Input() options!: { label: string; operation: string }[];
   @Output() onOptionClick = new EventEmitter<OptionProductClick>();
 
-  isDropdownOpen = false;
+  isDropdownSelected = '';
 
-  toggleDropdown(): void {
-    this.isDropdownOpen = !this.isDropdownOpen;
+  toggleDropdown(productId: string): void {
+    this.isDropdownSelected = productId;
   }
 
   closeDropdown(): void {
-    this.isDropdownOpen = false;
+    this.isDropdownSelected = '';
   }
 
   stopPropagation(event: Event): void {
@@ -36,5 +35,9 @@ export class ProductTableBodyComponent {
       product,
     });
     this.closeDropdown();
+  }
+
+  onImageError(event: any): void {
+    event.target.src = 'assets/default.png';
   }
 }

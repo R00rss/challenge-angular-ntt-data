@@ -20,5 +20,8 @@ export class ProductPage implements OnInit {
   constructor(private productService: ProductService) {}
   ngOnInit(): void {
     this.productService.loadProducts();
+    this.productService.state$.subscribe((state) => {
+      console.log(state.isLoadingProducts);
+    });
   }
 }

@@ -1,4 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ProductService } from '@/app/product/application/services/product-service';
+import ProductEntity from '@/app/product/domain/entities/product.entity';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  Subject,
+  Subscription,
+} from 'rxjs';
+
+const DEFAULT_DEBOUNCE_TIME = 300;
 
 @Component({
   selector: 'product-search-component',
@@ -6,10 +16,26 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './product-search-component.html',
   styleUrl: './product-search-component.css',
 })
-export class ProductSearchComponent {
+export class ProductSearchComponent implements OnInit {
   @Output() searchChange = new EventEmitter<string>();
 
-  // onSearchTermChange(newTerm: string) {
-  //   this.searchTermChange.emit(newTerm);
-  // }
+  searchTerm$ = new Subject<string>();
+  searchTermSubscription: Subscription | undefined;
+  constructor(private readonly productService: ProductService) {}
+
+  ngOnInit(): void {
+    this.setupSearchTermDebounce();
+  }
+
+  onSearchTermChange(event: any) {
+    this.searchTerm$.next(event.target.value);
+  }
+
+  setupSearchTermDebounce() {
+    this.searchTermSubscription = this.searchTerm$
+      .pipe(debounceTime(DEFAULT_DEBOUNCE_TIME), distinctUntilChanged())
+      .subscribe((term) => {
+        this.productService.changeFilter(term);
+      });
+  }
 }
