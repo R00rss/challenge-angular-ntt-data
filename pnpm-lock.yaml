@@ -29,15 +29,6 @@ importers:
       '@fontsource-variable/nunito-sans':
         specifier: ^5.2.6
         version: 5.2.6
-      '@ngrx/component-store':
-        specifier: ^20.0.0
-        version: 20.0.0(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
-      '@ngrx/operators':
-        specifier: ^20.0.0
-        version: 20.0.0(rxjs@7.8.2)
-      '@ngrx/store':
-        specifier: ^20.0.0
-        version: 20.0.0(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
       class-transformer:
         specifier: ^0.5.1
         version: 0.5.1
@@ -852,23 +843,6 @@ packages:
   '@napi-rs/nice@1.0.4':
     resolution: {integrity: sha512-Sqih1YARrmMoHlXGgI9JrrgkzxcaaEso0AH+Y7j8NHonUs+xe4iDsgC3IBIDNdzEewbNpccNN6hip+b5vmyRLw==}
     engines: {node: '>= 10'}
-
-  '@ngrx/component-store@20.0.0':
-    resolution: {integrity: sha512-s/s7kxnIGBEBEIH26XPq/FpJ5KBgaScUhn7+pLmTYmS/zCZ3zDWRYS/CRnmr1sfyqPSKF4PZStmICtpdA0UGyg==}
-    peerDependencies:
-      '@angular/core': ^20.0.0
-      rxjs: ^6.5.3 || ^7.5.0
-
-  '@ngrx/operators@20.0.0':
-    resolution: {integrity: sha512-Dp6HweO6wOJkUgcfuv6s8OrYIJf3TAYfvCFCoM1cQtLc70P9vhvqKggCR8BsrckF7XZa95zcm7Pab6OHFnOPWg==}
-    peerDependencies:
-      rxjs: ^6.5.3 || ^7.4.0
-
-  '@ngrx/store@20.0.0':
-    resolution: {integrity: sha512-UVj6UVayXknq1V/OXSGAVG+CdSXYg+oFM6T4aplcP2fuq/4oHtnVi93hkIYa9OU+rhAuHvfRsOsGsTtxlpj52w==}
-    peerDependencies:
-      '@angular/core': ^20.0.0
-      rxjs: ^6.5.3 || ^7.5.0
 
   '@npmcli/agent@3.0.0':
     resolution: {integrity: sha512-S79NdEgDQd/NGCay6TCoVzXSj74skRZIKJcpJjC5lOq34SZzyI6MqtiiWoiVWoVrTcGjNeC4ipbh1VIHlpfF5Q==}
@@ -3559,23 +3533,6 @@ snapshots:
       '@napi-rs/nice-win32-ia32-msvc': 1.0.4
       '@napi-rs/nice-win32-x64-msvc': 1.0.4
     optional: true
-
-  '@ngrx/component-store@20.0.0(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)':
-    dependencies:
-      '@angular/core': 20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)(zone.js@0.15.1)
-      rxjs: 7.8.2
-      tslib: 2.8.1
-
-  '@ngrx/operators@20.0.0(rxjs@7.8.2)':
-    dependencies:
-      rxjs: 7.8.2
-      tslib: 2.8.1
-
-  '@ngrx/store@20.0.0(@angular/core@20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)':
-    dependencies:
-      '@angular/core': 20.1.6(@angular/compiler@20.1.6)(rxjs@7.8.2)(zone.js@0.15.1)
-      rxjs: 7.8.2
-      tslib: 2.8.1
 
   '@npmcli/agent@3.0.0':
     dependencies:
