@@ -1,5 +1,5 @@
 # NTT Data Frontend Exercise
-Este proyecto es una solución al ejercicio técnico de frontend propuesto por NTT Data en 2024. El objetivo principal es demostrar habilidades en Angular, buenas prácticas de desarrollo y arquitectura limpia (Clean Architecture).
+Este proyecto es una solución al ejercicio técnico de frontend propuesto por NTT Data en 2025. El objetivo principal es demostrar habilidades en Angular, buenas prácticas de desarrollo y arquitectura limpia (Clean Architecture).
 
 ## Descripción
 La aplicación permite gestionar productos, incluyendo funcionalidades como listado, búsqueda, creación, edición y eliminación. Se ha implementado siguiendo los principios de Clean Architecture, separando claramente las capas de dominio, aplicación, infraestructura y presentación para facilitar la escalabilidad y el mantenimiento.  
