@@ -6,7 +6,6 @@ import {
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideStore } from '@ngrx/store';
 import { provideHttpClient } from '@angular/common/http';
 import { provideCoreServices } from '../core.providers';
 
@@ -17,6 +16,5 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
-    provideStore(),
   ],
 };
