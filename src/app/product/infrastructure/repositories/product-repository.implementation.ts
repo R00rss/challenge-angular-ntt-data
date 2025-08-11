@@ -19,10 +19,11 @@ import {
   UpdateProductsApiResponse,
 } from '../dto/product-api.dto';
 import { ResultWithMessage } from '@/app/core/domain/entities/result';
+import { environment } from '@/enviroments/environment';
 
 @Injectable()
 class HttpProductRepository implements ProductRepository {
-  private readonly baseUrl = '/api/products';
+  private readonly baseUrl = `${environment.apiUrl}/products`;
 
   constructor(private readonly httpClient: HttpClient) {}
 
