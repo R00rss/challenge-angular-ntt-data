@@ -1,4 +1,3 @@
-// src/app/core/infrastructure/errors/api-error.ts
 export class ApiError extends Error {
   constructor(
     message: string,

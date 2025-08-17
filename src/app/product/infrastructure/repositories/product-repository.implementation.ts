@@ -35,6 +35,7 @@ class HttpProductRepository implements ProductRepository {
         }
         return null;
       }),
+      delay(1000),
       catchError((error) => this.handleError(error))
     );
   }
@@ -56,6 +57,7 @@ class HttpProductRepository implements ProductRepository {
           data: ProductMapper.fromDto(response.data),
           message: response.message,
         })),
+        delay(1000),
         catchError((error) => this.handleError(error))
       );
   }
@@ -84,6 +86,7 @@ class HttpProductRepository implements ProductRepository {
     const url = `${this.baseUrl}/${id}`;
     return this.httpClient.delete<DeleteProductsApiResponse>(url).pipe(
       map(() => undefined),
+      delay(1000),
       catchError((error) => this.handleError(error))
     );
   }

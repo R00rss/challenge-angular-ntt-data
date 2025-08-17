@@ -1,5 +1,4 @@
 import { ProductService } from '@/app/product/application/services/product-service';
-import ProductEntity from '@/app/product/domain/entities/product.entity';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   debounceTime,

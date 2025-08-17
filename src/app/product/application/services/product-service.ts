@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, delay, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import ProductEntity from '../../domain/entities/product.entity';
 import { FilterProductsUseCase } from '../use-cases/filter-products.use-case';
 import { ProductQuery } from '../../domain/value-objects/product-query';
@@ -157,7 +157,6 @@ export class ProductService {
   findProductById(productId: string): Observable<ProductEntity | null> {
     this.loadingService.block();
     return this.findProductByIdUseCase.execute(productId).pipe(
-      delay(2000),
       map((result) => {
         this.loadingService.unblock();
         return result;
